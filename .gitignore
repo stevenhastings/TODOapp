@@ -1,0 +1,35 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+*.env
+
+# Editors and IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependency directories
+env/
+envs/
+venv/
+.venv/
+
+# Python virtual environments
+.python-version
+pip-selfcheck.json
+
+# History files
+.history
+
+# Scratch files
+*.bak
+*.swp
+*.tmp
+*.dump
+*.dmp
+*.test
+scratch/
+``` 
