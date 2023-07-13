@@ -24,7 +24,7 @@ The Todo List App is a simple application built with Streamlit that allows users
 ## Usage
 
 1. Run the app:
-```streamlit run app.py```
+```streamlit run web.py```
 
 2. The Todo List App will be launched in your default browser.
 
