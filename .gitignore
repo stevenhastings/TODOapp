@@ -9,3 +9,12 @@ __pycache__/
 # Scratch files
 scratch/
 scratch
+
+# Python
+__pycache__/
+
+# History files
+.history/
+
+# Scratch files
+scratch/
