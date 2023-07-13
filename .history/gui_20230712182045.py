@@ -1,3 +1,0 @@
-import funcs
-import sys
-
