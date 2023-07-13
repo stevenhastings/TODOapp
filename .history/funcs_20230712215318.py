@@ -72,7 +72,7 @@ def remove_todo_index(index):
         todos.pop(index)
         write_todos(todos)
         return True
-    return False
+
 
 
 def edit_todo(index, updated_todo):

@@ -38,7 +38,7 @@ if st.button('Edit Todo'):
 if st.session_state.edit_mode:
     selected_index = st.number_input('Enter the number of the task to edit:', min_value=1, max_value=len(todos), value=st.session_state.selected_index or 1, step=1)
     st.session_state.selected_index = selected_index
-    if st.button('Select Task', key='select_task_button'):
+    if st.button('Select Task'):
         st.session_state.edit_mode = False
 
 if st.session_state.edit_mode:
@@ -46,7 +46,7 @@ if st.session_state.edit_mode:
     if selected_index:
         edit_todo = todos[selected_index - 1].strip()
         updated_todo = st.text_input('Enter the updated task:', value=edit_todo, key=f"edit-{selected_index}")
-        if st.button('Update', key='update_button'):
+        if st.button('Update'):
             try:
                 funcs.edit_todo(selected_index - 1, updated_todo)
                 st.write(f'Task "{edit_todo}" updated to "{updated_todo}" successfully!')
@@ -54,7 +54,6 @@ if st.session_state.edit_mode:
                 st.session_state.selected_index = None
             except Exception as e:
                 st.write(f'Error updating task: {str(e)}')
-
 
 # Button - Remove Task
 if st.button('Remove Task'):
@@ -86,25 +85,15 @@ if st.session_state.remove_mode:
 
 
 
-if "clear_mode" not in st.session_state:
-    st.session_state.clear_mode = False
-
 # Button - Clear Todos
 if st.button('Clear Todos'):
-    st.session_state.clear_mode = True
-
-if st.session_state.clear_mode:
-    st.warning('Are you sure you want to clear all todos?')
-    if st.button('Confirm'):
-        funcs.clear_todos()
-        st.success('Todos cleared successfully!')
-        st.session_state.clear_mode = False
-
-    if st.button('Cancel'):
-        st.session_state.clear_mode = False
-
-
-
+    confirm_clear = st.button('Confirm')
+    if confirm_clear:
+        try:
+            funcs.clear_todos()
+            st.success('Todos cleared successfully!')
+        except Exception as e:
+            st.write(f'Error clearing todos: {str(e)}')
 
 # Button - Exit
 if st.button('Exit'):

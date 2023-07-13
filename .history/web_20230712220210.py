@@ -86,24 +86,12 @@ if st.session_state.remove_mode:
 
 
 
-if "clear_mode" not in st.session_state:
-    st.session_state.clear_mode = False
-
 # Button - Clear Todos
 if st.button('Clear Todos'):
-    st.session_state.clear_mode = True
-
-if st.session_state.clear_mode:
     st.warning('Are you sure you want to clear all todos?')
     if st.button('Confirm'):
         funcs.clear_todos()
         st.success('Todos cleared successfully!')
-        st.session_state.clear_mode = False
-
-    if st.button('Cancel'):
-        st.session_state.clear_mode = False
-
-
 
 
 # Button - Exit

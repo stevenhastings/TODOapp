@@ -68,11 +68,12 @@ def remove_todo_index(index):
     """
 
     todos = read_todos()
-    if 0 <= index < len(todos):
-        todos.pop(index)
+    if index >= 0 and index < len(todos):
+        del todos[index]
         write_todos(todos)
         return True
-    return False
+    else:
+        return False
 
 
 def edit_todo(index, updated_todo):

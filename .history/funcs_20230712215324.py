@@ -75,6 +75,8 @@ def remove_todo_index(index):
     return False
 
 
+
+
 def edit_todo(index, updated_todo):
     """
     edit_todo : Edits a todo in the todo list.
