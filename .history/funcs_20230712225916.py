@@ -75,21 +75,21 @@ def remove_todo_index(index):
     return False
 
 
-def edit_todo(index, updated_todo):
-    """
-    edit_todo : Edits a todo in the todo list.
+def edit_todo():
+    if st.session_state.selected_index is not None:
+        index = st.session_state.selected_index
+        if index >= 0 and index < len(todos):
+            updated_todo = st.session_state["updated_todo"]
+            try:
+                funcs.edit_todo(index, updated_todo)
+                st.write(f'Task "{todos[index].strip()}" updated to "{updated_todo}" successfully!')
+                st.session_state.selected_index = None
+                st.session_state.edit_mode = False
+            except Exception as e:
+                st.write(f'Error updating task: {str(e)}')
+        else:
+            st.write('Invalid task index.')
 
-    Parameters
-    ----------
-    index : int, optional
-        The index of the todo to edit.
-    updated_todo : str
-        The updated todo.
-
-    """
-    todos = read_todos()
-    todos[index] = f"{updated_todo.strip()}\n"  # Replace the task without appending the date
-    write_todos(todos)
 
 
 def clear_todos():

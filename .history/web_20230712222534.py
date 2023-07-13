@@ -15,8 +15,7 @@ st.markdown(
             padding: 2rem;
         }
         .strealit-primary-color {
-            background-color: #FF5722;
-        }
+        
         .streamlit-button.primary-button {
             background-color: #FF5722;
             color: white;
@@ -53,10 +52,12 @@ todo = st.text_input('Enter a new task:')
 st.write('You entered:', todo)
 
 # Button - Add Task
-# Button - Add Task
 if st.button('Add Task'):
-    funcs.add_todo(todo)
-    st.write(f'Task "{todo}" added successfully!')
+    try:
+        funcs.add_todo(todo)
+        st.write(f'Task "{todo}" added successfully!')
+    except Exception as e:
+        st.write(f'Error adding task: {str(e)}')
 
 # Display Todo List
 st.subheader('Todo List:')

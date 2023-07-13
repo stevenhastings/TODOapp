@@ -3,47 +3,11 @@ import streamlit as st
 import funcs
 import exit_server
 
-# Set page title and favicon
-st.set_page_config(page_title="My Todo List App", page_icon="📝", initial_sidebar_state="expanded")
-
-# Apply custom theme
-st.markdown(
-    """
-    <style>
-        .streamlit-container {
-            max-width: 800px;
-            padding: 2rem;
-        }
-        .strealit-primary-color {
-            background-color: #FF5722;
-        }
-        .streamlit-button.primary-button {
-            background-color: #FF5722;
-            color: white;
-        }
-        .title-wrapper {
-            margin-bottom: 2rem;
-        }
-        .footer {
-            font-size: 14px;
-            color: gray;
-            text-align: center;
-            margin-top: 2rem;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Initialize session state
 if "edit_mode" not in st.session_state:
     st.session_state.edit_mode = False
 if "selected_index" not in st.session_state:
     st.session_state.selected_index = None
-if "remove_mode" not in st.session_state:
-    st.session_state.remove_mode = False
-if "clear_mode" not in st.session_state:
-    st.session_state.clear_mode = False
 
 # Title
 st.title('My To-Do List App')
@@ -53,10 +17,12 @@ todo = st.text_input('Enter a new task:')
 st.write('You entered:', todo)
 
 # Button - Add Task
-# Button - Add Task
 if st.button('Add Task'):
-    funcs.add_todo(todo)
-    st.write(f'Task "{todo}" added successfully!')
+    try:
+        funcs.add_todo(todo)
+        st.write(f'Task "{todo}" added successfully!')
+    except Exception as e:
+        st.write(f'Error adding task: {str(e)}')
 
 # Display Todo List
 st.subheader('Todo List:')
@@ -89,6 +55,7 @@ if st.session_state.edit_mode:
             except Exception as e:
                 st.write(f'Error updating task: {str(e)}')
 
+
 # Button - Remove Task
 if st.button('Remove Task'):
     st.session_state.remove_mode = True
@@ -116,6 +83,12 @@ if st.session_state.remove_mode:
             except Exception as e:
                 st.write(f'Error removing task: {str(e)}')
 
+
+
+
+if "clear_mode" not in st.session_state:
+    st.session_state.clear_mode = False
+
 # Button - Clear Todos
 if st.button('Clear Todos'):
     st.session_state.clear_mode = True
@@ -130,15 +103,14 @@ if st.session_state.clear_mode:
     if st.button('Cancel'):
         st.session_state.clear_mode = False
 
+
+
+
 # Button - Exit
 if st.button('Exit'):
     confirm_exit = st.button('Confirm')
     if confirm_exit:
-        exit_server.exit_program()
+        exit_server()
         st.stop()
     st.balloons()
     st.success('Server stopped successfully!')
-
-# Footer
-st.markdown('<hr>', unsafe_allow_html=True)
-st.markdown('<p class="footer">Thanks for using My Todo List App!</p>', unsafe_allow_html=True)

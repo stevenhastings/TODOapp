@@ -4,7 +4,8 @@ import funcs
 import exit_server
 
 # Set page title and favicon
-st.set_page_config(page_title="My Todo List App", page_icon="📝", initial_sidebar_state="expanded")
+st.set_page_config(page_title="My Todo List App", page_icon="📝", initial_sidebar_state="expanded", menu_items="Edit Task": edit_todo())
+st.primaryColor = "#FF5722"
 
 # Apply custom theme
 st.markdown(
@@ -13,9 +14,6 @@ st.markdown(
         .streamlit-container {
             max-width: 800px;
             padding: 2rem;
-        }
-        .strealit-primary-color {
-            background-color: #FF5722;
         }
         .streamlit-button.primary-button {
             background-color: #FF5722;
@@ -53,10 +51,12 @@ todo = st.text_input('Enter a new task:')
 st.write('You entered:', todo)
 
 # Button - Add Task
-# Button - Add Task
 if st.button('Add Task'):
-    funcs.add_todo(todo)
-    st.write(f'Task "{todo}" added successfully!')
+    try:
+        funcs.add_todo(todo)
+        st.write(f'Task "{todo}" added successfully!')
+    except Exception as e:
+        st.write(f'Error adding task: {str(e)}')
 
 # Display Todo List
 st.subheader('Todo List:')
