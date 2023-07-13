@@ -58,6 +58,10 @@ if st.session_state.edit_mode:
             except Exception as e:
                 st.write(f'Error updating task: {str(e)}')
 
+# Date Input - Due Date
+import datetime
+due_date = st.date_input('Due Date', datetime.date.today())
+
 # Button - Clear Todos
 if st.button('Clear Todos'):
     confirm_clear = st.button('Confirm')
@@ -72,8 +76,6 @@ if st.button('Clear Todos'):
 if st.button('Exit'):
     confirm_exit = st.button('Confirm')
     if confirm_exit:
-        st.write("Exiting the My To-Do List App...")
         st.balloons()
         st.stop()
-    st.success('You have exited the My To-Do List App!')
 

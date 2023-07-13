@@ -75,21 +75,33 @@ def remove_todo(todo):
     except ValueError:
         return False
 
-def edit_todo(index, updated_todo):
+def edit_todo(todo, new_todo):
     """
-    edit_todo : Edits a todo in the todo list.
+    edit_todo: Edits a todo in the todo list.
 
     Parameters
     ----------
-    index : int, optional
-        The index of the todo to edit.
-    updated_todo : str
-        The updated todo.
+    todo : int
+    new_todo : str
+         
+    Returns
+    -------
+    bool
+        True if the todo was edited, False otherwise.
 
     """
+
     todos = read_todos()
-    todos[index] = f"{updated_todo.strip()} @ {datetime.today().strftime('%Y-%m-%d')}\n"
-    write_todos(todos)
+
+    try:
+        index = todos.index(todo + "\n")
+        todos[index] = new_todo + " " + current_date + "\n"
+        write_todos(todos)
+        return True
+    
+    except ValueError:
+        return False
+
 
 def clear_todos():
     """
@@ -112,3 +124,12 @@ def get_todo_list():
 
     todos = read_todos()
     return [todo.strip() for todo in todos]
+
+def exit_program():
+    """
+    exit_program: Exits the program.
+    
+    """
+
+    exit(0)
+

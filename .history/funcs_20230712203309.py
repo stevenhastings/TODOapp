@@ -91,6 +91,8 @@ def edit_todo(index, updated_todo):
     todos[index] = f"{updated_todo.strip()} @ {datetime.today().strftime('%Y-%m-%d')}\n"
     write_todos(todos)
 
+
+
 def clear_todos():
     """
     clear_todos: Clears all todos from the todo list.
@@ -112,3 +114,12 @@ def get_todo_list():
 
     todos = read_todos()
     return [todo.strip() for todo in todos]
+
+def exit_program():
+    """
+    exit_program: Exits the program.
+    
+    """
+
+    exit(0)
+

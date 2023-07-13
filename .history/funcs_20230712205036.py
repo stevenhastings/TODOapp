@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 user_prompt = "Enter a todo: "
 current_date = datetime.today().strftime('%Y-%m-%d')
 
@@ -112,3 +113,12 @@ def get_todo_list():
 
     todos = read_todos()
     return [todo.strip() for todo in todos]
+
+def exit_program():
+    """
+    exit_program: Exits the program.
+    
+    """
+    st.balloons()
+    st.stop()
+

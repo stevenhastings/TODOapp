@@ -60,8 +60,8 @@ if st.session_state.edit_mode:
 
 # Button - Clear Todos
 if st.button('Clear Todos'):
-    confirm_clear = st.button('Confirm')
-    if confirm_clear:
+    st.warning('Are you sure you want to clear all todos?')
+    if st.button('Confirm'):
         try:
             funcs.clear_todos()
             st.success('Todos cleared successfully!')
@@ -70,10 +70,8 @@ if st.button('Clear Todos'):
 
 # Button - Exit
 if st.button('Exit'):
-    confirm_exit = st.button('Confirm')
-    if confirm_exit:
-        st.write("Exiting the My To-Do List App...")
+    st.warning('Are you sure you want to exit?')
+    if st.button('Confirm'):
         st.balloons()
         st.stop()
-    st.success('You have exited the My To-Do List App!')
 

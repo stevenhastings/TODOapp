@@ -41,7 +41,7 @@ if st.button('Edit Todo'):
 if st.session_state.edit_mode:
     selected_index = st.number_input('Enter the number of the task to edit:', min_value=1, max_value=len(todos), value=st.session_state.selected_index or 1, step=1)
     st.session_state.selected_index = selected_index
-    if st.button('Select Task'):
+    if st.form_submit_button('Select Task'):  # Updated to st.form_submit_button()
         st.session_state.edit_mode = False
 
 if st.session_state.edit_mode:
@@ -49,7 +49,7 @@ if st.session_state.edit_mode:
     if selected_index:
         edit_todo = todos[selected_index - 1].strip()
         updated_todo = st.text_input('Enter the updated task:', value=edit_todo, key=f"edit-{selected_index}")
-        if st.button('Update'):
+        if st.form_submit_button('Update'):  # Updated to st.form_submit_button()
             try:
                 funcs.edit_todo(selected_index - 1, updated_todo)
                 st.write(f'Task "{edit_todo}" updated to "{updated_todo}" successfully!')
@@ -58,10 +58,14 @@ if st.session_state.edit_mode:
             except Exception as e:
                 st.write(f'Error updating task: {str(e)}')
 
+# Date Input - Due Date
+import datetime
+due_date = st.date_input('Due Date', datetime.date.today())
+
 # Button - Clear Todos
 if st.button('Clear Todos'):
-    confirm_clear = st.button('Confirm')
-    if confirm_clear:
+    st.warning('Are you sure you want to clear all todos?')
+    if st.form_submit_button('Confirm'):  # Updated to st.form_submit_button()
         try:
             funcs.clear_todos()
             st.success('Todos cleared successfully!')
@@ -70,10 +74,7 @@ if st.button('Clear Todos'):
 
 # Button - Exit
 if st.button('Exit'):
-    confirm_exit = st.button('Confirm')
-    if confirm_exit:
-        st.write("Exiting the My To-Do List App...")
+    st.warning('Are you sure you want to exit?')
+    if st.form_submit_button('Confirm'):  # Updated to st.form_submit_button()
         st.balloons()
         st.stop()
-    st.success('You have exited the My To-Do List App!')
-

@@ -72,8 +72,5 @@ if st.button('Clear Todos'):
 if st.button('Exit'):
     confirm_exit = st.button('Confirm')
     if confirm_exit:
-        st.write("Exiting the My To-Do List App...")
         st.balloons()
         st.stop()
-    st.success('You have exited the My To-Do List App!')
-
